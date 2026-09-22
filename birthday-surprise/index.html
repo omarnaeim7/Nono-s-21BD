@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday, My Love! ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-pink: #ff85a1;
+      --deep-pink: #e83a59;
+      --burgundy: #7c2438;
+      --soft-pink: #fff0f3;
+      --shadow-pink: rgba(232, 58, 89, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #ffebee linear-gradient(135deg, #fff0f5 0%, #fde2e4 40%, #ffcad4 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+      color: var(--burgundy);
+    }
+
+    /* Ambient floating elements */
+    .bg-decor {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.45;
+      animation: floatUp 8s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) scale(0.8) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.6; }
+      100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+    }
+
+    /* Main Viewport Shell matching video layout */
+    .app-viewport {
+      width: 100%;
+      max-width: 820px;
+      min-height: 520px;
+      background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #ffeaef 100%);
+      border-radius: 28px;
+      box-shadow: 0 16px 40px var(--shadow-pink), 0 0 0 8px rgba(255, 255, 255, 0.6);
+      margin: 16px;
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+
+    /* Video corner decorations */
+    .corner-decor-tl {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #b3889b;
+      font-weight: 600;
+    }
+    .corner-decor-tr {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      color: var(--deep-pink);
+    }
+    .corner-decor-bl {
+      position: absolute;
+      bottom: 14px;
+      left: 18px;
+      font-size: 24px;
+      opacity: 0.85;
+    }
+
+    /* Screen containers */
+    .screen {
+      display: none;
+      flex: 1;
+      width: 100%;
+      padding: 34px 28px 28px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: fadeIn 0.45s ease-out forwards;
+      position: relative;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Next Button */
+    .next-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: #ffffff;
+      color: var(--deep-pink);
+      font-weight: 800;
+      font-size: 16px;
+      border: 2px solid #ffccd5;
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(232, 58, 89, 0.16);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .next-btn:hover {
+      background: var(--deep-pink);
+      color: #ffffff;
+      border-color: var(--deep-pink);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 18px rgba(232, 58, 89, 0.3);
+    }
+    .next-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .top-right-next {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      z-index: 25;
+    }
+
+    /* ================= SCREEN 1: LOVE METER ================= */
+    .meter-character-container {
+      width: 140px;
+      height: 120px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .meter-character {
+      width: 110px;
+      height: 110px;
+    }
+
+    .meter-feedback-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--burgundy);
+      min-height: 32px;
+      margin-bottom: 2px;
+    }
+
+    .meter-percentage {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--deep-pink);
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(232, 58, 89, 0.15);
+    }
+
+    .dial-wrapper {
+      position: relative;
+      width: 250px;
+      height: 125px;
+      margin-bottom: 18px;
+    }
+
+    .dial-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .dial-center-label {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Caveat', cursive;
+      font-size: 34px;
+      color: var(--deep-pink);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .slider-container {
+      width: 82%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .love-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 10px;
+      background: #f8c9d4;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .love-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      cursor: grab;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 8px rgba(232, 58, 89, 0.4);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+      background-size: 14px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    #screen1-next-wrapper {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ================= SCREEN 2: 3 GIFT BOXES ================= */
+    .gift-screen-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--burgundy);
+      margin-bottom: 6px;
+    }
+
+    .gift-screen-subtitle {
+      font-size: 17px;
+      color: #9c6778;
+      font-weight: 600;
+      margin-bottom: 34px;
+    }
+
+    .gift-boxes-grid {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      max-width: 600px;
+    }
+
+    .gift-box-card {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .gift-box-card:hover {
+      transform: translateY(-8px) scale(1.06);
+    }
+
+    .gift-box-art {
+      width: 120px;
+      height: 120px;
+      filter: drop-shadow(0 10px 18px rgba(232, 58, 89, 0.18));
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+    .gift-box-card:nth-child(2) .gift-box-art { animation-delay: 0.6s; }
+    .gift-box-card:nth-child(3) .gift-box-art { animation-delay: 1.2s; }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .gift-box-number {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--deep-pink);
+      background: rgba(255,255,255,0.8);
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    /* ================= SURPRISE 1: YOUR BOUQUET ================= */
+    .bouquet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 600;
+      color: #9e2a2b;
+      margin-bottom: 18px;
+    }
+
+    .bouquet-stage {
+      position: relative;
+      width: 100%;
+      max-width: 660px;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bouquet-illustration {
+      width: 220px;
+      height: 300px;
+      z-index: 2;
+      filter: drop-shadow(0 12px 24px rgba(158, 42, 43, 0.25));
+    }
+
+    .bouquet-badge {
+      position: absolute;
+      background: #ffffff;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #7a3e4d;
+      box-shadow: 0 4px 12px rgba(160, 50, 70, 0.12);
+      border: 1px solid rgba(255, 180, 195, 0.5);
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    .badge-tl { top: 40px; left: 24px; }
+    .badge-ml { top: 145px; left: 10px; }
+    .badge-bl { top: 250px; left: 32px; }
+    .badge-tr { top: 40px; right: 24px; }
+    .badge-mr { top: 145px; right: 10px; }
+    .badge-br { top: 250px; right: 32px; }
+
+    /* ================= SURPRISE 2: SCRAPBOOK & MUSIC ================= */
+    .scrapbook-stage {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scrapbook-sticker {
+      position: absolute;
+      z-index: 3;
+    }
+    .sticker-pass {
+      top: 10px; left: 20px;
+      transform: rotate(-10deg);
+      background: #fdf0d5;
+      border: 1.5px dashed #c1121f;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #780000;
+    }
+    .sticker-ticket {
+      top: 54px; left: 36px;
+      transform: rotate(6deg);
+      background: #ffe5ec;
+      border: 1px solid #ffb3c6;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--deep-pink);
+    }
+    .sticker-flowers { top: 90px; left: 15px; font-size: 38px; }
+    .sticker-envelope { bottom: 25px; left: 30px; font-size: 42px; transform: rotate(-8deg); }
+    .sticker-butterfly { top: 20px; right: 40px; font-size: 36px; }
+
+    .scrapbook-photo-frame {
+      width: 270px;
+      height: 195px;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(180, 70, 90, 0.18);
+      position: relative;
+      z-index: 4;
+      margin-bottom: 20px;
+      transform: rotate(-1deg);
+    }
+
+    .scrapbook-photo-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(180deg, #cbe3fb 0%, #b8d8ba 60%, #87a878 100%);
+    }
+
+    .music-player-card {
+      width: 320px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 20px rgba(232, 58, 89, 0.15);
+      border: 1px solid rgba(255, 180, 195, 0.5);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .music-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .music-album-art {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    .music-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #333;
+    }
+
+    .music-artist {
+      font-size: 12px;
+      color: #888;
+      font-weight: 600;
+    }
+
+    .music-scrubber {
+      width: 100%;
+      height: 4px;
+      background: #f0e0e5;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .music-progress {
+      height: 100%;
+      width: 35%;
+      background: var(--deep-pink);
+      border-radius: 2px;
+    }
+
+    .music-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 2px;
+    }
+
+    .player-btn {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .play-pause-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      color: #fff;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ================= SURPRISE 3: LETTER ================= */
+   /* ================= SURPRISE 3: LETTER (FIXED) ================= */
+    #screen-surprise-3 {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      padding: 20px 16px 30px;
+      box-sizing: border-box;
+    }
+    #screen-surprise-3.active {
+      display: flex;
+    }
+
+    .letter-stage {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .parchment-card {
+      background: #fdfbf7;
+      border: 1px solid #ebd9c8;
+      border-radius: 18px;
+      padding: 26px 24px 34px;
+      box-shadow: 0 10px 28px rgba(160, 100, 80, 0.12);
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      line-height: 1.8;
+      font-size: 14.5px;
+      color: #4a2c2c;
+      /* Scrollbar fix for long letters */
+      max-height: 65vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    /* Style the scrollbar to match the pink theme */
+    .parchment-card::-webkit-scrollbar {
+      width: 6px;
+    }
+    .parchment-card::-webkit-scrollbar-track {
+      background: rgba(255, 230, 235, 0.5);
+      border-radius: 10px;
+    }
+    .parchment-card::-webkit-scrollbar-thumb {
+      background: #ff85a1;
+      border-radius: 10px;
+    }
+
+    .letter-signoff {
+      text-align: right;
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--deep-pink);
+      margin-top: 18px;
+    }
+
+    .letter-cats {
+      position: absolute;
+      bottom: -15px;
+      left: 10px;
+      width: 75px;
+      height: 75px;
+      z-index: 10;
+    }
+
+    /* ================= CELEBRATION ================= */
+    .celebration-cake {
+      font-size: 70px;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @media (max-width: 600px) {
+      .app-viewport { min-height: 92vh; margin: 8px; border-radius: 22px; }
+      .screen { padding: 28px 16px 20px; }
+      .bouquet-stage { height: 330px; }
+      .bouquet-illustration { width: 170px; height: 240px; }
+      .bouquet-badge { font-size: 11.5px; padding: 6px 12px; }
+      .badge-tl { top: 20px; left: 10px; }
+      .badge-ml { top: 120px; left: 2px; }
+      .badge-bl { top: 220px; left: 15px; }
+      .badge-tr { top: 20px; right: 10px; }
+      .badge-mr { top: 120px; right: 2px; }
+      .badge-br { top: 220px; right: 15px; }
+      .gift-boxes-grid { gap: 16px; }
+      .gift-box-art { width: 95px; height: 95px; }
+      .parchment-card { padding: 20px 20px 30px; font-size: 13.5px; }
+    }
+/* ... previous CSS rules are above ... */
+
+    /* PASTE IT RIGHT HERE: */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    body:has(#screen-surprise-3.active) .app-viewport {
+      display: none !important;
+    }
+
+    #screen-surprise-3.active {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      width: 90% !important;
+      max-width: 720px !important;
+      background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #ffeaef 100%) !important;
+      border-radius: 28px !important;
+      box-shadow: 0 16px 40px rgba(232, 58, 89, 0.18) !important;
+      border: 2px solid rgba(255, 255, 255, 0.9) !important;
+      padding: 30px 20px !important;
+      margin: 20px auto !important;
+      box-sizing: border-box !important;
+    }
+
+    .letter-stage {
+      width: 100% !important;
+      max-width: 650px !important;
+      margin: 0 auto !important;
+    }
+
+    .parchment-card {
+      width: 100% !important;
+      box-sizing: border-box !important;
+      max-height: 75vh !important;
+      overflow-y: auto !important;
+      padding: 22px 20px !important;
+    }
+
+    .parchment-card::-webkit-scrollbar {
+      width: 6px;
+    }
+    .parchment-card::-webkit-scrollbar-thumb {
+      background: #ff85a1;
+      border-radius: 10px;
+    }
+
+  </style>  <!-- DO NOT DELETE THIS TAG -->
+</head>
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts Background -->
+  <div class="bg-decor" id="floating-hearts-container"></div>
+
+  <!-- Main Experience Card -->
+  <div class="app-viewport">
+    
+    <div class="corner-decor-tl">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+      </svg>
+      <span>Open when alone</span>
+    </div>
+    
+    <div class="corner-decor-tr">
+      <span>🕊️</span><span>💕</span><span>🕊️</span>
+    </div>
+
+    <div class="corner-decor-bl">💌✈️</div>
+
+    <!-- ================= SCREEN 1: LOVE METER ================= -->
+    <section class="screen active" id="screen-1">
+      <div class="meter-character-container">
+        <div id="character-svg-wrapper"></div>
+      </div>
+
+      <div class="meter-feedback-text" id="meter-feedback">How much do you love me?</div>
+      <div class="meter-percentage" id="meter-percent-display">0%</div>
+
+      <!-- Speedometer Dial -->
+      <div class="dial-wrapper">
+        <svg class="dial-svg" viewBox="0 0 200 110">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ffd5de" />
+              <stop offset="50%" stop-color="#ff85a1" />
+              <stop offset="100%" stop-color="#e83a59" />
+            </linearGradient>
+          </defs>
+          <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#fce4ec" stroke-width="20" stroke-linecap="round" />
+          <path id="gauge-arc" d="M 20 100 A 80 80 0 0 1 20 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="20" stroke-linecap="round" />
+          <circle cx="100" cy="100" r="4" fill="#e83a59" />
+        </svg>
+        <div class="dial-center-label">love <span style="font-size:16px;">♥</span></div>
+      </div>
+
+      <!-- Slider (0% to 1000%) -->
+      <div class="slider-container">
+        <input type="range" min="0" max="1000" value="0" class="love-slider" id="love-slider" />
+      </div>
+
+      <!-- Next Button on Correct Answer -->
+      <div id="screen1-next-wrapper" style="opacity: 0; pointer-events: none;">
+        <button class="next-btn" onclick="goToScreen('screen-2')">Next &rarr;</button>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 2: 3 GIFT BOXES ================= -->
+    <section class="screen" id="screen-2">
+      <h1 class="gift-screen-title">You passed the love test</h1>
+      <p class="gift-screen-subtitle">Your surprises are waiting for you</p>
+
+      <div class="gift-boxes-grid">
+        <!-- Gift 1 -->
+        <button class="gift-box-card" onclick="goToScreen('screen-surprise-1')">
+          <svg class="gift-box-art" viewBox="0 0 100 100">
+            <rect x="20" y="42" width="60" height="48" rx="8" fill="#d0ebff" stroke="#a5d8ff" stroke-width="2"/>
+            <rect x="16" y="32" width="68" height="14" rx="4" fill="#e7f5ff" stroke="#a5d8ff" stroke-width="2"/>
+            <rect x="44" y="32" width="12" height="58" fill="#ff85a1"/>
+            <rect x="16" y="56" width="68" height="10" fill="#ff85a1"/>
+            <path d="M 50 32 C 38 20, 26 28, 44 32 Z" fill="#ff6b8b"/>
+            <path d="M 50 32 C 62 20, 74 28, 56 32 Z" fill="#ff6b8b"/>
+            <circle cx="50" cy="32" r="5" fill="#e83a59"/>
+          </svg>
+          <span class="gift-box-number">Box 1</span>
+        </button>
+
+        <!-- Gift 2 -->
+        <button class="gift-box-card" onclick="goToScreen('screen-surprise-2')">
+          <svg class="gift-box-art" viewBox="0 0 100 100">
+            <rect x="20" y="42" width="60" height="48" rx="8" fill="#d0ebff" stroke="#a5d8ff" stroke-width="2"/>
+            <rect x="16" y="32" width="68" height="14" rx="4" fill="#e7f5ff" stroke="#a5d8ff" stroke-width="2"/>
+            <rect x="44" y="32" width="12" height="58" fill="#ff85a1"/>
+            <rect x="16" y="56" width="68" height="10" fill="#ff85a1"/>
+            <path d="M 50 32 C 38 20, 26 28, 44 32 Z" fill="#ff6b8b"/>
+            <path d="M 50 32 C 62 20, 74 28, 56 32 Z" fill="#ff6b8b"/>
+            <circle cx="50" cy="32" r="5" fill="#e83a59"/>
+          </svg>
+          <span class="gift-box-number">Box 2</span>
+        </button>
+
+        <!-- Gift 3 -->
+        <button class="gift-box-card" onclick="goToScreen('screen-surprise-3')">
+          <svg class="gift-box-art" viewBox="0 0 100 100">
+            <rect x="20" y="42" width="60" height="48" rx="8" fill="#d0ebff" stroke="#a5d8ff" stroke-width="2"/>
+            <rect x="16" y="32" width="68" height="14" rx="4" fill="#e7f5ff" stroke="#a5d8ff" stroke-width="2"/>
+            <rect x="44" y="32" width="12" height="58" fill="#ff85a1"/>
+            <rect x="16" y="56" width="68" height="10" fill="#ff85a1"/>
+            <path d="M 50 32 C 38 20, 26 28, 44 32 Z" fill="#ff6b8b"/>
+            <path d="M 50 32 C 62 20, 74 28, 56 32 Z" fill="#ff6b8b"/>
+            <circle cx="50" cy="32" r="5" fill="#e83a59"/>
+          </svg>
+          <span class="gift-box-number">Box 3</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= SURPRISE 1: YOUR BOUQUET ================= -->
+    <section class="screen" id="screen-surprise-1">
+      <button class="next-btn top-right-next" onclick="goToScreen('screen-2')">Next &rarr;</button>
+      <h2 class="bouquet-title">Your Bouquet</h2>
+
+      <div class="bouquet-stage">
+        <div class="bouquet-badge badge-tl">You make my heart bloom</div>
+        <div class="bouquet-badge badge-ml">Life feels sweeter with you</div>
+        <div class="bouquet-badge badge-bl">You make every moment sweeter</div>
+
+        <div class="bouquet-badge badge-tr">I choose you every day</div>
+        <div class="bouquet-badge badge-mr">My love for you keeps growing</div>
+        <div class="bouquet-badge badge-br">My heart will always choose you</div>
+
+        <!-- Rose Bouquet Vector Art -->
+        <img src="bouquet.JPG" alt="Bouquet" class="bouquet-illustration" style="object-fit: contain;">
+      </div>
+    </section>
+
+    <!-- ================= SURPRISE 2: SCRAPBOOK & MUSIC ================= -->
+    <section class="screen" id="screen-surprise-2">
+      <button class="next-btn top-right-next" onclick="goToScreen('screen-2')">Next &rarr;</button>
+
+      <div class="scrapbook-stage">
+        <div class="scrapbook-sticker sticker-pass">LOVE PASS<br><span style="font-size:8px;">ADMIT ONE TO MY HEART</span></div>
+        <div class="scrapbook-sticker sticker-ticket">HAPPINESS TICKET #01</div>
+        <div class="scrapbook-sticker sticker-flowers">🌸🌸</div>
+        <div class="scrapbook-sticker sticker-envelope">💌</div>
+        <div class="scrapbook-sticker sticker-butterfly">🦋</div>
+
+        <!-- Photo Frame -->
+      
+<div class="scrapbook-photo-frame">
+  <img src="us.jpg" alt="Us" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+</div>
+          <div class="scrapbook-photo-frame">
+  <img src="photo.jpg" alt="Our Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+</div>
+        </div>
+
+        <!-- Music Player Widget -->
+        <div class="music-player-card">
+          <div class="music-header">
+            <div class="music-album-art">🎵</div>
+            <div class="music-meta">
+  <div class="music-title">و غلاوتك</div>
+  <div class="music-artist">Amr Diab</div>
+</div>
+            </div>
+            <div style="color:var(--deep-pink); font-size:18px;">❤️</div>
+          </div>
+
+       <div class="music-scrubber" onclick="scrubTrack(event)">
+            <div class="music-progress" id="track-progress-bar"></div>
+          </div>
+
+       <div class="music-controls">
+            <button class="player-btn" onclick="restartAudio()">⏮</button>
+            <button class="player-btn play-pause-btn" id="play-pause-btn" onclick="toggleAudio()">▶</button>
+            <button class="player-btn" onclick="forwardAudio()">⏭</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SURPRISE 3: LETTER ================= -->
+    <section class="screen" id="screen-surprise-3">
+      <button class="next-btn top-right-next" onclick="goToScreen('screen-celebration')">Next &rarr;</button>
+      <h2 class="letter-title">A Letter From My Heart</h2>
+
+      <div class="letter-stage">
+        <div class="parchment-card">
+          <span style="position:absolute; top:8px; right:12px; font-size:22px;">🌸</span>
+          <p>
+           🚨🚨 WEWAWEWAWEWAWEWAWEWAWEWA 🚨🚨
+HOLD ONNNNN! STOP EVERYTHINGGGGG!
+Is that the birthday alarm ringing againnnnnnnnnnnnnnnn?!
+HELL YEAHHHHHHH YNONETYYYYYYY!
+Da msh mogarad youm 3ady wala 3eid melad ay had kda w elsalam 
+DAAA MY QUEEN’S BIRTHDAYYYY! Meraty w hayatie w 3omry w alby w nonety w benty w okhty w ahla w agmal w aham haga f donyety🤭❤️❤️💍
+          </p>
+</p>
+          <p>
+          <p>
+            Welcome to chapter 21 ya ruh ruh ruh ruh alby!
+ </p>
+          <p>
+</p>
+          <p>
+سنة حلوه و جديدة عليكي يا أجمل وأرق وأطيب واشيك واحلىىىى بنوتة في الدنيا، وعشان ربنا يباركلنا في كل ثانية جاية وتبقى سنة كلها ستر وسكينة وفرحة تعوضنا عن أي تعب،
+ لازم نبدأ زي عادتنا بأحلى كلام يتقال:
+
+اللهم إنا نستودعك سنة مضت من عمري، فاغفر لي ما فات، وبارك لي فيما هو آت، وأصلح حالي، ويَسّر أمري، واشرح صدري، وحقق لي كل ما يتمنى قلبي. اللهم اجعل هذا العام بداية لأجمل أقداري، مليئاً بالرضا، محفوفاً بالسكينة والرحمة والتوفيق، واجمع بيننا على خير وسعادة لا تنتهي يا رب العالمين.
+
+اللهم آمين يا عيوني ونور حياتي كلها ❤️
+          </p>
+          <p>
+            Elmohm b2a ybata en ana el lahza dy mstanyha mn kteeeeeeeeeer mot mot bgd w kol youm ba3od a3ed b2aly aktar mn talat shohor bgd wenty saybany kda
+Akheran sana gdida fhayatek ykatkoty w wallah el3azim law had bas sa2alny kda howa enta msada2 en elbatikha el esmaha nour dy akbar mnak dlw w kebrt sana kaman msa mostahill asada2 walahy zay mana msh msada2 kol da enk rge3tely blsalama bas mahma kan kda kda hatefdaly dayman fnazary benty w okhty el soghayara w ruhy w nonety elsoghanana el malish gherha w hatefdaly kda walahy hata law wselna meeeet sana w mkarmshin w haletna hala😂
+          </p>
+           <p>
+           Kol sana wenty tayeba yruh elruh ya donyetyw hayatie w farhety w bahgety w 3arosty w ganety 3al ard dy w sanady w aghla w ahla ne3ma gabhaly rabena n awel ma etwaladt walahy yarab sana beida zay albek kda w helwa w malyana nagah w hana w sroor w elgrad da y3ady 3ala kher kda yarab w teb2a malyana hob w hanan w dehk w rahet bal w damir kda yarab❤️❤️❤️
+          </p>
+          </p>
+ana ka omar law hass eny bkarar nafs elkalam aw el msha3er kol sana aw kol monasba w bhawel 3ala ad ma2dar agaded eza kan fy video aw dfhaga zay kda ynono🤭 bas howa bgd gher kda ana elkalam el f alby msh kalam ba2olo w khalas w heh w frehna w khalas la khales walahy da kmeyt hob bgd bytgaded kol swaya 3omry wala haset wala kont motkhayal awsal lkda hobek da walahy haga mattwsfsh walahy haga ad3aaaaaf ad3aaaaaaaaf kelmt bahebk wala million kelmt bahebk hata bahebk b3add no2at elraml el fy elsahara elkawkab kolaha w b3add kol no2tt nafas ay ensan etnafeso mn awel youm fl kawkab lyoum eleyama bgd 
+ </p>
+          <p>
+kestna dy ybet ynono msh kesa 3abera kda w elsalam aw elheya 3adyw bthsal kteer w kda la bgd ksetna bkol tfaselha w kol el mwakef el bthsal fyha akwa mn akwa kesas mosalsalat framadan walahy😂 thesyha maktoba kda l3eyalna w 3eyal 3eyalna inshalla yeb2o yesma3oha kda mn baba w mama🤭 w ezay eldonya wasltna lkol el dar bena m3ada shwayt hagat ya3ni 3ashan el 3eyal😂 bas gher kda lala bgd ezay kona sanad w dahr lba3d ezay enty ankazteny mn elmot w eldya3 w waslteny lkol haga helwa ana fyha ezay bntkhan2 w bn3abat w ezay bngry 3ala tol netsaleh w nhel kol haga mn gher mano2af 3ala ba3d 3al wahda w ezay kona ba2yin 3ala ba3d kda w nehkelhom kaman kestna f elgam3a w elhwarat el3botos😂 bas bgd hahkelhom enty ezay khalety hayatie mn hayat wahed fashel w daye3 w bela haweya bgd l angah w akwa kesa aw film momken shabab y3eshoha sawa mshallah law et3aml film nakhod oscar walahy😂 
+ </p>
+          <p>
+3amatan b2a bgd w abl ay haga ana 3ayz a2ol en bgd 3ashhhhhhh 3alena w awy bgd en ehna ederna nestahmel el 3 shohor el hebab da elto2al welad elkalb bgd elwahed msh te3b elwahed kan bymot fy as3ab 3 shohor bkol mshaklo w hwarato w daghto w bgd msh 3aref han3mel eh ba3d kda bas bgd rabena ma yfara2na kda khales bgd ana mn kotr ma t3ebt msh motkhayel bgd eny rge3t ashofek w bada2t ashofek akher fatra w kda tany zay zaman fa bgd elwahed te3b awy w akid enty ad3af ad3afy bgd w motkhayel walahy bas rabena ykhalina lba3d w nkamel 3ala kher ynour 3omry yhayatie w bgd shapohh linaa😂😂 
+ </p>
+          <p>
+Aham haga ana 3ayez ashkorek 3ala wa2tek leya w henyetk w sabrek w hobek w hananek w ghertk w lazatek wkheft damek ybet enty w enty tamaly t2aldeny kda 😂 w khofek 3alay fkol mwakefna sawa w ta3abek w mozakretk w nagahek w na2letk w eghtehadek 3ala nafsek bgd w dayman raf3a rasek w fakhor byky awy awy awy bgd w 3ala kol chat bena w kol sahra w enty ta3bana w ana bara w ana fhagz w ana f ay heta bgd dayman sahya w sahrana 3ashany kda w 3ayz akamn ashkorek 3ala kol dehka menk w koll lahza helwa elwahed bgf mab2ash bydhak mn albo bgd gher m3aky ynono walahyy w 3ala kol hdeya helwa menk hata law chocolate walahy bgd bgd bgd bgd mattkhayalish btbsetny kda ezay w bthassny b hagat helwa kteer bgd mahma kan eh w 3ayz kaman ashkorek awy 3al aman w elraha w el sakina w elmental stable el ana fy ba3d wgodek gambek w walahy el 3azim law no3d 3ala rasim m3afen f 7o2 hafdal hass eny aghna w as3ad king 3al kawkab kolo walahy w bgd w aham  haga b2a 3ayz ashkorek awy 3ala orbek mn mama w mimi w gad3antek w wa2fetk gambohm dayman bgd da blnezbaly bldonya w ma fyhaa bgd w 3o2bal ma teb2a hamatek kda w tefdal radya 3anenea😂😂 
+ </p>
+          <p>
+Bas anya sanya bas enty fakra en enty mlaak ya3ni?😂  da kda kda walahy bas msh 24 sa3a bardo SA3AT KDA BNSAGHAR DEMAGHNA YBAAAAAAAAAAAAY btb2y 3ayza meeeet shebsheb 3ala weshk bgd yaaret yaet bgd n2alel el 3end w nashafan eldemagh w fathet el amisw tshamary elkom w mhassany enk dakhla khna2a kda brohomek 😂 bas beny w benk bardo ybet ynono ba3sha2 omek bkol halatek bahes en baheb 3abatek elbygy bas msh kotro bardo w bamooot fyky hatra wenty magnona w 3asabya w 3anida kda😂😂 
+Ahla haga w aham haga el 3ayzin nefdal nstamer fyha yaret w nthasen en nesma3 ba3d w nefdal mothaderin w blzo2 w balash nashafan demagh w YARETT ELWAHED Y3TERF BGHALATO B 5 GNEH😂 bas ma 3alena bgd ahla haga bardo el zekryat w elayam w elsa3at w elda2ay2 elhelwa el bena bgd kol lahza mn sa3et rsayel zaman 3al sc w el lazy mno😂 lghayttt youmna da 3adena bkmyt hagatttttttttttt bgd bgd bahes en fy nas mtgawezin m3adosh byha w da bgd ne3ma kbera awy mn rabena w bgd haga helwa gedn gedan fa rabena yarab ykhalena lba3d w nefda n3mel zekrayat aktar w akatr w aktarrr w add one moree to the bucket soon🤭 wla kol helm bntkhayalo sawa w bnhawel nha2a2o lghayt manla2ina a3din m3 zein w lolo w bntghada w bnl3ab w btzakrelhom w kda a333333 nefsy bgd🤭
+ </p>
+          <p>
+braghm kol da ana 3aref en elbo3d w elsafar w elmsafat elbtb2a bena dy zay ma oltelk ad eh hya sa3ba w bakon batamana bgd eny ab2a gambek lahza hata w bgd byb2a fy ham 3ala alby msh motkhaylahh w kol lahza b3eda 3anek bthasesny eny mayet w bamot mn gherk bgd w enk bgd elnafs elbyhyeny bgd w bat2aseflk mn kol alby 3ala ay sanya za3altek fyha aw nayemtk za3lana aw khaletk t3ayaty aw 3alet soty aw etghabet f ay mawkef fa hakek 3ala rasy ynour 3enya w malish gherk ytag rasyyy❤️❤️❤️
+ </p>
+          <p>
+Bas elsanady gherrrrrrrrrr ehna kberna ybanota kberna bgd w khalas f akher sana ybanota enty w ba2ena mohandesin ad eldonya w grad w harakat fa bgd bgd hhaweol 3ala ad ma2dar akhaly elsanady gher bgd mn kol haga w nwada3 el shababeya w el 3ozobya b shyaka kda😂 3ashan b3d kda b2a neb2a fbetna yruhi w ma2fol 3alena bab wahed foreverrr🤭🤭
+ </p>
+          <p>
+n2leb 3araby b2a shwaya 
+ </p>
+          <p>
+روحي وعمري،
+من يوم ما عرفتك وأنا متأكد إن ربنا بعتك لقلبي رحمة وهدية ونور وفرحه وهنا
+أنتِ أماني في الدنيا دي والله، وأنتِ الحلم اللي اتحقق بجد والستر والرضا الي عمري ما حسيته غير وانا معاكي❤️❤️.
+ </p>
+          <p>
+حبُّ الديارِ شغفنَ قلبي  ولكن حبُّ من سكنَ الديارا
+
+أحبكِ حباً لو وُزّع على أهل الأرض لكفاهم وفاض،
+أنتِ البداية التي تمنيتها، والنهاية التي لا أرجو سواها.
+ </p>
+          <p>
+عارفه انك🤭🤭
+</p>
+          <p>
+إنك حبيبة عموري
+</p>
+          <p>
+وعروسة عموري
+</p>
+          <p>
+وحياه عموري
+</p>
+          <p> 
+وبنت عموري
+</p>
+          <p>
+وروح عموري
+</p>
+          <p>
+وقلب عموري
+</p>
+          <p>
+ودنيا عموري
+</p>
+          <p>
+وسند عموري
+</p>
+          <p>
+وجنة عموري في الدنيا بجدددد ❤️
+ </p>
+          <p>
+KOL SANA WENTY TAYEBA YA AGHLA HAGA HASALET FY HYATIE RABENA YKHALEKY LEYA W MAYHRMNISH MNK ABDAN YAHLA HAGA FLDONYA KOLAHA WALA ASHOF FYKY YOUM WEHSH ABADANNNN❤️❤️❤️
+ </p>
+          <p>
+Elsana elfatet kont ba3etlk kol loghat el3alam f kelmt bahebk 3ashan ahawel abayn ad eh en bahebk bas el wahed et2aked million fel meya en kol loghat el 3alam matkafish zara mn el shaylo leky f alby ya ahla w agmal 3arosa w khariga fldonya yhandasaaa❤️❤️
+ </p>
+          <p>
+Day 1 of Year 21 starts right now, make a wish ya ruhhhh alby, w rabena ykhaleky leya w mayhrmnish menk abadan! 🎂🎉👑💍❤️❤️❤️
+          </p>
+
+          <div class="letter-signoff">Always, forever. ❤️</div>
+
+          <!-- Hugging Cats Vector -->
+          <svg class="letter-cats" viewBox="0 0 100 100">
+            <ellipse cx="40" cy="65" rx="22" ry="25" fill="#ffffff" stroke="#e0a8b4" stroke-width="2"/>
+            <polygon points="26,45 34,30 42,44" fill="#ffffff" stroke="#e0a8b4" stroke-width="2"/>
+            <polygon points="46,44 54,30 62,45" fill="#ffffff" stroke="#e0a8b4" stroke-width="2"/>
+            <circle cx="36" cy="56" r="3" fill="#444"/>
+            <circle cx="48" cy="56" r="3" fill="#444"/>
+            <ellipse cx="62" cy="68" rx="20" ry="23" fill="#ffe3d8" stroke="#d59b87" stroke-width="2"/>
+            <polygon points="56,48 64,36 72,49" fill="#ffe3d8" stroke="#d59b87" stroke-width="2"/>
+            <polygon points="72,49 80,36 86,50" fill="#ffe3d8" stroke="#d59b87" stroke-width="2"/>
+            <path d="M 45 68 Q 58 74 65 68" stroke="#ff85a1" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CELEBRATION FINALE ================= -->
+    <section class="screen" id="screen-celebration">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+        <div class="celebration-cake">🎂✨</div>
+        <h1 class="gift-screen-title" style="font-size:36px; color:var(--deep-pink);">Happy Birthday, My Love!</h1>
+        <p class="gift-screen-subtitle" style="font-size:18px; max-width:460px;">
+          Here's to celebrating you today and every day. You mean everything to me! ❤️
+        </p>
+        <div style="margin-top:12px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+          <button class="next-btn" onclick="goToScreen('screen-1')">🔄 Replay Experience</button>
+          <button class="next-btn" onclick="goToScreen('screen-2')">🎁 Back to Gifts</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+<audio id="bg-audio" src="song.mp3" preload="auto" loop></audio>
+  <script>
+    // Floating background hearts
+    function createFloatingHearts() {
+      const container = document.getElementById('floating-hearts-container');
+      const symbols = ['❤️', '💖', '🌸', '✨', '💕'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = (Math.random() * 8) + 's';
+        heart.style.animationDuration = (6 + Math.random() * 6) + 's';
+        container.appendChild(heart);
+      }
+    }
+    createFloatingHearts();
+
+    // Screen navigation
+    function goToScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(screenId);
+      if (target) target.classList.add('active');
+      if (screenId === 'screen-celebration') burstConfetti();
+    }
+
+    // Dynamic Cat Expressions matching video
+    const catSVGs = {
+      neutral: `
+        <svg class="meter-character" viewBox="0 0 120 120">
+          <ellipse cx="60" cy="70" rx="38" ry="34" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="30,48 40,28 52,44" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="68,44 80,28 90,48" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <circle cx="48" cy="65" r="4.5" fill="#2b2b2b"/>
+          <circle cx="72" cy="65" r="4.5" fill="#2b2b2b"/>
+          <path d="M 54 74 Q 60 78 66 74" stroke="#2b2b2b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="44" cy="98" rx="10" ry="7" fill="#ffffff" stroke="#2b2b2b" stroke-width="2.5"/>
+          <ellipse cx="76" cy="98" rx="10" ry="7" fill="#ffffff" stroke="#2b2b2b" stroke-width="2.5"/>
+        </svg>`,
+      crying: `
+        <svg class="meter-character" viewBox="0 0 120 120">
+          <ellipse cx="60" cy="70" rx="38" ry="34" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="30,48 40,28 52,44" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="68,44 80,28 90,48" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <path d="M 43 66 Q 48 60 53 66" stroke="#2b2b2b" stroke-width="3" fill="none"/>
+          <path d="M 67 66 Q 72 60 77 66" stroke="#2b2b2b" stroke-width="3" fill="none"/>
+          <path d="M 46 68 L 42 92" stroke="#48cae4" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 74 68 L 78 92" stroke="#48cae4" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 52 80 Q 60 72 68 80" stroke="#2b2b2b" stroke-width="2.5" fill="none"/>
+        </svg>`,
+      hurts: `
+        <svg class="meter-character" viewBox="0 0 120 120">
+          <ellipse cx="60" cy="70" rx="38" ry="34" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="30,48 40,28 52,44" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="68,44 80,28 90,48" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <line x1="42" y1="62" x2="52" y2="67" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round"/>
+          <line x1="78" y1="62" x2="68" y2="67" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round"/>
+          <line x1="56" y1="42" x2="56" y2="52" stroke="#2b2b2b" stroke-width="2"/>
+          <line x1="60" y1="40" x2="60" y2="52" stroke="#2b2b2b" stroke-width="2"/>
+          <line x1="64" y1="42" x2="64" y2="52" stroke="#2b2b2b" stroke-width="2"/>
+          <line x1="53" y1="78" x2="67" y2="78" stroke="#2b2b2b" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`,
+      shocked: `
+        <svg class="meter-character" viewBox="0 0 120 120">
+          <ellipse cx="60" cy="70" rx="38" ry="34" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="30,48 40,28 52,44" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="68,44 80,28 90,48" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <circle cx="48" cy="64" r="6" fill="#2b2b2b"/>
+          <circle cx="72" cy="64" r="6" fill="#2b2b2b"/>
+          <path d="M 85 55 Q 89 58 85 64 Q 81 58 85 55" fill="#48cae4"/>
+          <ellipse cx="60" cy="78" rx="4" ry="6" fill="#2b2b2b"/>
+        </svg>`,
+      happy: `
+        <svg class="meter-character" viewBox="0 0 120 120">
+          <ellipse cx="60" cy="70" rx="38" ry="34" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="30,48 40,28 52,44" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <polygon points="68,44 80,28 90,48" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+          <path d="M 43 64 Q 48 57 53 64" stroke="#2b2b2b" stroke-width="3" fill="none"/>
+          <path d="M 67 64 Q 72 57 77 64" stroke="#2b2b2b" stroke-width="3" fill="none"/>
+          <ellipse cx="38" cy="70" rx="6" ry="3.5" fill="#ff85a1"/>
+          <ellipse cx="82" cy="70" rx="6" ry="3.5" fill="#ff85a1"/>
+          <path d="M 53 74 Q 60 80 67 74" stroke="#2b2b2b" stroke-width="2.5" fill="none"/>
+        </svg>`,
+      correct: `
+        <svg class="meter-character" viewBox="0 0 120 120">
+          <text x="15" y="45" font-size="16" fill="#e83a59">💖</text>
+          <text x="88" y="40" font-size="16" fill="#e83a59">💕</text>
+          <ellipse cx="60" cy="70" rx="38" ry="34" fill="#ffffff" stroke="#e83a59" stroke-width="3.5"/>
+          <polygon points="30,48 40,28 52,44" fill="#ffffff" stroke="#e83a59" stroke-width="3.5"/>
+          <polygon points="68,44 80,28 90,48" fill="#ffffff" stroke="#e83a59" stroke-width="3.5"/>
+          <text x="40" y="68" font-size="16" fill="#e83a59">❤️</text>
+          <text x="64" y="68" font-size="16" fill="#e83a59">❤️</text>
+          <ellipse cx="36" cy="72" rx="6" ry="3.5" fill="#ffb3c6"/>
+          <ellipse cx="84" cy="72" rx="6" ry="3.5" fill="#ffb3c6"/>
+          <path d="M 52 76 Q 60 86 68 76 Z" fill="#e83a59" stroke="#2b2b2b" stroke-width="1.5"/>
+        </svg>`
+    };
+
+    // Slider logic
+    const slider = document.getElementById('love-slider');
+    const feedback = document.getElementById('meter-feedback');
+    const percentDisplay = document.getElementById('meter-percent-display');
+    const svgWrapper = document.getElementById('character-svg-wrapper');
+    const gaugeArc = document.getElementById('gauge-arc');
+    const nextBtnWrapper = document.getElementById('screen1-next-wrapper');
+
+    function updateGaugeArc(val) {
+      const capped = Math.min(val, 100);
+      const angle = (capped / 100) * Math.PI;
+      const endX = 100 - 80 * Math.cos(angle);
+      const endY = 100 - 80 * Math.sin(angle);
+      gaugeArc.setAttribute('d', `M 20 100 A 80 80 0 0 1 ${endX} ${endY}`);
+    }
+
+    function updateMeter(val) {
+      percentDisplay.innerText = val + '%';
+      updateGaugeArc(val);
+
+      if (val === 0) {
+        feedback.innerText = 'How much do you love me?';
+        svgWrapper.innerHTML = catSVGs.neutral;
+        nextBtnWrapper.style.opacity = '0';
+        nextBtnWrapper.style.pointerEvents = 'none';
+      } else if (val <= 30) {
+        feedback.innerText = 'Only that much?';
+        svgWrapper.innerHTML = catSVGs.crying;
+        nextBtnWrapper.style.opacity = '0';
+        nextBtnWrapper.style.pointerEvents = 'none';
+      } else if (val <= 50) {
+        feedback.innerText = 'That hurts...';
+        svgWrapper.innerHTML = catSVGs.hurts;
+        nextBtnWrapper.style.opacity = '0';
+        nextBtnWrapper.style.pointerEvents = 'none';
+      } else if (val <= 85) {
+        feedback.innerText = 'Half? Seriously?';
+        svgWrapper.innerHTML = catSVGs.shocked;
+        nextBtnWrapper.style.opacity = '0';
+        nextBtnWrapper.style.pointerEvents = 'none';
+      } else if (val <= 120) {
+        feedback.innerText = "Aww, that's more like it!";
+        svgWrapper.innerHTML = catSVGs.happy;
+        nextBtnWrapper.style.opacity = '0.5';
+        nextBtnWrapper.style.pointerEvents = 'auto';
+      } else {
+        feedback.innerText = 'Correct answer!';
+        svgWrapper.innerHTML = catSVGs.correct;
+        nextBtnWrapper.style.opacity = '1';
+        nextBtnWrapper.style.pointerEvents = 'auto';
+      }
+    }
+
+    slider.addEventListener('input', (e) => updateMeter(parseInt(e.target.value)));
+    updateMeter(0);
+// MP3 Music Player
+    const bgAudio = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-pause-btn');
+    const progressBar = document.getElementById('track-progress-bar');
+
+    function toggleAudio() {
+      if (bgAudio.paused) {
+        bgAudio.play().catch(err => {
+          alert("Could not load your song. Please make sure your audio file is in the same folder and the name in <audio src='...'> matches exactly!");
+        });
+        playBtn.innerText = '⏸';
+      } else {
+        bgAudio.pause();
+        playBtn.innerText = '▶';
+      }
+    }
+
+    function restartAudio() {
+      bgAudio.currentTime = 0;
+      if (!bgAudio.paused) bgAudio.play();
+    }
+
+    function forwardAudio() {
+      bgAudio.currentTime = Math.min(bgAudio.duration || 0, bgAudio.currentTime + 10);
+    }
+
+    bgAudio.ontimeupdate = function() {
+      if (bgAudio.duration) {
+        const pct = (bgAudio.currentTime / bgAudio.duration) * 100;
+        progressBar.style.width = pct + '%';
+      }
+    };
+
+    function scrubTrack(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (bgAudio.duration) {
+        bgAudio.currentTime = ratio * bgAudio.duration;
+      }
+      progressBar.style.width = (ratio * 100) + '%';
+    }
+   
+
+    // Confetti effect
+    function burstConfetti() {
+      const colors = ['#ff85a1', '#e83a59', '#ffd166', '#06d6a0', '#118ab2'];
+      for (let i = 0; i < 50; i++) {
+        const conf = document.createElement('div');
+        conf.style.position = 'fixed';
+        conf.style.width = '8px';
+        conf.style.height = '10px';
+        conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        conf.style.left = '50%';
+        conf.style.top = '40%';
+        conf.style.zIndex = '999';
+        conf.style.pointerEvents = 'none';
+        document.body.appendChild(conf);
+
+        const destX = (Math.random() - 0.5) * window.innerWidth * 0.8;
+        const destY = (Math.random() - 0.5) * window.innerHeight * 0.8;
+
+        conf.animate([
+          { transform: 'translate(0, 0)', opacity: 1 },
+          { transform: `translate(${destX}px, ${destY}px) rotate(720deg)`, opacity: 0 }
+        ], { duration: 2000, easing: 'ease-out', fill: 'forwards' });
+
+        setTimeout(() => conf.remove(), 2200);
+      }
+ }
+  </script>
+</body>
+</html>
