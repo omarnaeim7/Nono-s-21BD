@@ -676,6 +676,46 @@
 
   </style>  <!-- DO NOT DELETE THIS TAG -->
 </head>
+  /* ================= MOBILE BOUQUET FIX ================= */
+    @media (max-width: 600px) {
+      .bouquet-stage {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 360px !important;
+        height: 380px !important;
+        margin: 0 auto !important;
+      }
+
+      /* Neatly frame the photo */
+      .bouquet-illustration {
+        width: 180px !important;
+        height: 250px !important;
+        object-fit: cover !important;
+        border-radius: 16px !important;
+        box-shadow: 0 8px 22px rgba(232, 58, 89, 0.22) !important;
+        border: 2px solid #ffffff !important;
+      }
+
+      /* Shrink and wrap the quote badges so they don't collide */
+      .bouquet-badge {
+        font-size: 11px !important;
+        padding: 6px 10px !important;
+        max-width: 105px !important;
+        white-space: normal !important; /* Allows 2 clean lines */
+        text-align: center !important;
+        line-height: 1.25 !important;
+        z-index: 10 !important;
+      }
+
+      /* Position them neatly to the outer sides */
+      .badge-tl { top: 12px !important; left: -6px !important; }
+      .badge-ml { top: 115px !important; left: -10px !important; }
+      .badge-bl { bottom: 18px !important; top: auto !important; left: -6px !important; }
+
+      .badge-tr { top: 12px !important; right: -6px !important; }
+      .badge-mr { top: 115px !important; right: -10px !important; }
+      .badge-br { bottom: 18px !important; top: auto !important; right: -6px !important; }
+    }
   </style>
 </head>
 <body>
