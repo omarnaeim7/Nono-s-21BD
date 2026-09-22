@@ -713,6 +713,27 @@
       .badge-mr { top: 115px !important; right: -10px !important; }
       .badge-br { bottom: 18px !important; top: auto !important; right: -6px !important; }
     }
+    /* ================= FIX CELEBRATION CARD POSITION ================= */
+    body:has(#screen-celebration.active) .app-viewport {
+      display: none !important;
+    }
+
+    #screen-celebration.active {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: calc(100% - 20px) !important;
+      max-width: 720px !important;
+      min-height: 480px !important;
+      background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #ffeaef 100%) !important;
+      border-radius: 28px !important;
+      box-shadow: 0 16px 40px rgba(232, 58, 89, 0.18) !important;
+      border: 2px solid rgba(255, 255, 255, 0.9) !important;
+      padding: 40px 20px !important;
+      margin: 10px auto !important;
+      box-sizing: border-box !important;
+    }
   </style>  <!-- DO NOT DELETE THIS TAG -->
 </head>
   
